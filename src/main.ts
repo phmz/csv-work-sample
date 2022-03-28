@@ -26,7 +26,7 @@ async function bootstrap() {
 
   const stream = await fileHandlerService.getStream(
     'events.csv',
-    `${process.env.AWS_BUCKET_NAME}/${yearMonth.replace('-', '/')}`,
+    yearMonth.replace('-', '/'),
   );
 
   stream

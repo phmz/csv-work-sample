@@ -12,6 +12,18 @@ export class FileHandlerService {
   ) {}
 
   async getStream(fileName: string, folder?: string) {
-    return await this.s3HandlerService.getStream(fileName, folder);
+    // if using requestHandler
+    // AWS_BUCKET_NAME should be the complete bucket url
+    // (ex: https://my-bucket.s3.eu-west-3.amazonaws.com)
+
+    // if using s3Handler
+    // AWS_BUCKET_NAME should be just the bucket name (ex: my-bucket)
+
+    // if using fsHandler
+    // AWS_BUCKET_NAME should be the path to the folder (ex: /tmp/my-bucket)
+    return await this.s3HandlerService.getStream(
+      fileName,
+      `${process.env.AWS_BUCKET_NAME}/${folder}`,
+    );
   }
 }

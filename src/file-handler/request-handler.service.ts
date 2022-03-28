@@ -6,9 +6,9 @@ import { HttpService } from '@nestjs/axios';
 export class RequestHandlerService implements IFileHandler {
   constructor(private readonly httpService: HttpService) {}
 
-  async getStream(path: string) {
+  async getStream(fileName: string, path: string) {
     const response = await this.httpService.axiosRef({
-      url: path,
+      url: `${path}/${fileName}`,
       method: 'GET',
       responseType: 'stream',
     });
