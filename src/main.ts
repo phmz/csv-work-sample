@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { config as awsConfig } from 'aws-sdk';
+import { FileHandlerService } from './file-handler/file-handler.service';
 
 async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);
@@ -16,5 +17,14 @@ async function bootstrap() {
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     region: process.env.AWS_REGION,
   });
+
+  const fileHandlerService = app.get(FileHandlerService);
+
+  const stream = await fileHandlerService.getStream(
+    'events.csv',
+    `${process.env.AWS_BUCKET_NAME}/${yearMonth.replace('-', '/')}`,
+  );
+
+  stream.pipe(process.stdout);
 }
 bootstrap();
