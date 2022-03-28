@@ -9,6 +9,10 @@ export class DataExporterService {
     private readonly dynamodbExporterService: DynamodbExporterService,
   ) {}
 
+  formatStream() {
+    return this.fsExporterService.formatStream();
+  }
+
   writeStream() {
     return this.fsExporterService.writeStream();
   }

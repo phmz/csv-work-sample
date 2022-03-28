@@ -32,6 +32,7 @@ async function bootstrap() {
   stream
     .pipe(processorService.readCsv())
     .pipe(processorService.processCsv())
+    .pipe(dataExporterService.formatStream())
     .pipe(dataExporterService.writeStream())
     .on('finish', () => {
       console.log('Finished');

@@ -4,6 +4,10 @@ import * as stream from 'stream';
 
 @Injectable()
 export class DynamodbExporterService {
+  formatStream() {
+    return new stream.PassThrough();
+  }
+
   writeStream() {
     const dynamoDb = new DynamoDB.DocumentClient();
 
